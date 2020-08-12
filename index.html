@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="randomNumber"class="form-control" type="text">
+                    <button id="generatePin" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input id="userInput" class="form-control" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                                <div onclick="userNumber(7)" id="seven" class="button">7</div>
+                                <div onclick="userNumber(8)" id="eight" class="button">8</div>
+                                <div onclick="userNumber(9)" id="nine" class="button">9</div>
+                              </div>
+                              <div class="calc-button-row">
+                                <div onclick="userNumber(4)" id="four" class="button">4</div>
+                                <div onclick="userNumber(5)" id="five" class="button">5</div>
+                                <div  onclick="userNumber(6)" id="six" class="button">6</div>
+                              </div>
+                              <div class="calc-button-row">
+                                  
+                                <div onclick="userNumber(1)" id="one" class="button">1</div>
+                                <div onclick="userNumber(2)" id="two" class="button">2</div>
+                                <div onclick="userNumber(3)" id="three" class="button">3</div>
+                              </div>
+                              <div class="calc-button-row">
+                                  <div  onclick="userNumber('')" id="delete" class="button"><</div>
+                                  <div onclick="userNumber(0)" id="zero" class="button">0</div>
+                                  <div  onclick="userNumber('')" id="clear" class="button">C</div>
+                              </div>
+                            <div>
+                                <button id="SubmitButton" type="submit" class="submit-btn">Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="wrong" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="right" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+    <script>
+        //Generate Pin. This function will give you random pin number
+    
+        document.getElementById('generatePin').addEventListener('click', function(){
+         var input = document.getElementById('randomNumber').value;
+         var inputNumber = parseInt(input);
+         var randomNumber = Math.floor(1000 + Math.random()*9000);
+         document.getElementById('randomNumber').value = randomNumber;
+        })
+      
+      function userNumber(digitValue){
+         
+          document.getElementById('userInput').value = document.getElementById('userInput').value + digitValue;
+
+      }
+      document.getElementById('SubmitButton').addEventListener('click',function(){
+          if(document.getElementById('userInput').value == document.getElementById('randomNumber').value){
+             document.getElementById('right').style.display ='block';
+          }else{
+            document.getElementById('wrong').style.display ='block';
+          }
+      })
+      
+
+    </script>
+</body>
+</html>
