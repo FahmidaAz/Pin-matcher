@@ -38,9 +38,9 @@
                                 <div onclick="userNumber(3)" id="three" class="button">3</div>
                               </div>
                               <div class="calc-button-row">
-                                  <div  onclick="userNumber('')" id="delete" class="button"><</div>
+                                  <div  onclick="userNumber('<')" id="delete" class="button"><</div>
                                   <div onclick="userNumber(0)" id="zero" class="button">0</div>
-                                  <div  onclick="userNumber('')" id="clear" class="button">C</div>
+                                  <div  onclick="userNumber('C')" id="clear" class="button">C</div>
                               </div>
                             <div>
                                 <button id="SubmitButton" type="submit" class="submit-btn">Submit</button>
@@ -56,7 +56,7 @@
         </div>
     </div>
     <script>
-        //Generate Pin. This function will give you random pin number
+        //Generate Pin. This function will give you a random pin number
     
         document.getElementById('generatePin').addEventListener('click', function(){
          var input = document.getElementById('randomNumber').value;
@@ -65,11 +65,21 @@
          document.getElementById('randomNumber').value = randomNumber;
         })
       
-      function userNumber(digitValue){
-         
-          document.getElementById('userInput').value = document.getElementById('userInput').value + digitValue;
+       //get userInput
 
+      function userNumber(digitValue){
+         var value =document.getElementById('userInput').value
+          document.getElementById('userInput').value = document.getElementById('userInput').value + digitValue;
+           if(digitValue == 'C'){
+               document.getElementById('userInput').value = '';
+               document.getElementById('right').style.display ='none';
+               document.getElementById('wrong').style.display ='none';
+           }else if(digitValue == '<'){
+            document.getElementById('userInput').value = value.substr(0, value.length - 1);
+           }
       }
+      //match user input and random number
+
       document.getElementById('SubmitButton').addEventListener('click',function(){
           if(document.getElementById('userInput').value == document.getElementById('randomNumber').value){
              document.getElementById('right').style.display ='block';
@@ -78,6 +88,7 @@
           }
       })
       
+
 
     </script>
 </body>
